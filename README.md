@@ -1,4 +1,4 @@
-# How fast does a quantum error-correction decoder need to be?
+# [How fast does a quantum error-correction decoder need to be?](https://requiemdoomed.github.io/QEC-Latency-Decoder/)
 
 **Measuring classical feedback latency in software QEC decoders, from simulation to IBM device replicas**
 
@@ -9,8 +9,6 @@
 Quantum error correction only works if the loop *measure the syndrome → decode → apply the correction* finishes before the qubits lose their state. Most QEC simulations treat the classical part of that loop as instant. I wanted to measure it instead.
 
 Over four weekends I built the 3-qubit bit-flip code in Qiskit and timed its decoder in Python and in C, 10,000 cycles at a time. I counted how often a decode misses a 40 µs coherence deadline. Then I ran the code with real-time feed-forward on calibrated replicas of two IBM processors, to see what each microsecond of decoder delay costs in logical error.
-
-**Open [`index.html`](index.html) for the full walkthrough.** To get a live link, turn on GitHub Pages (Settings → Pages → deploy from the `main` branch, root folder) and the page will be served at `https://<your-username>.github.io/<repo-name>/`. It is one self-contained page with the theory, every script (with copy buttons), all the figures and the results, organised weekend by weekend.
 
 ---
 
@@ -80,23 +78,6 @@ The job is 3 circuits × 4,000 shots, which fits easily in the free Open Plan's 
 
 ---
 
-## Repository layout
-
-```
-├── index.html              ← demo page: the whole project in one file
-├── README.md
-├── requirements.txt        pinned stack (qiskit 2.5.2, aer 0.17.2, runtime 0.50.0, scipy, numpy…)
-├── requirements-dev.txt    + pytest
-├── setup.sh                one-time environment setup
-├── run_all.sh              reruns everything into outputs/
-├── src/                    all experiment code (Python + the C decoder)
-├── tests/                  pytest unit tests
-├── reference_results/      my reference run: JSON data, figures (PNG + PDF), LaTeX table
-├── docs/                   final report (PDF and Word) and screenshots
-├── site/                   builds index.html from the code in src/
-└── .github/workflows/      runs the tests on every push (Python 3.11–3.13)
-```
-
 More screenshots: [code view in light mode](docs/screenshots/weekend3.png) · [phone layout](docs/screenshots/mobile.png).
 
 The code blocks in `index.html` are generated from the files in `src/`, so the page always shows exactly the code that ran. After changing code, rebuild the page with `pip install pygments pillow && python site/build_html.py`.
@@ -113,8 +94,6 @@ My first version ran without errors but gave several quietly wrong answers. Thes
 - **Unpinned qubit layouts.** Letting the transpiler place each circuit separately created a fake 0.42-point difference between offline and real-time correction. Pinning one layout made it disappear.
 - **Padding with `id` gates.** The transpiler deletes `id` gates, so the "time-matched" bare qubit wasn't time-matched at all. A `delay` instruction stays.
 - **The clock is part of the measurement.** Two back-to-back clock reads already cost 63 ns in Python and 26 ns in C, so most of what I first measured was the timer itself.
-
-The full list (14 items) is on the Overview tab of `index.html` and in Appendix B of the report.
 
 ---
 
