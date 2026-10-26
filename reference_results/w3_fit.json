@@ -1,0 +1,25 @@
+{
+  "n": 10000,
+  "ad_stat": 245.19064244770198,
+  "ad_p": 0.01,
+  "ad_lognormal_pass": false,
+  "ks": {
+    "lognorm": {
+      "D": 0.10344671432773944,
+      "p": 1.262136448780207e-93
+    },
+    "gamma": {
+      "D": 0.17714668881914908,
+      "p": 5.631424982093146e-275
+    },
+    "weibull_min": {
+      "D": 0.33335902114833943,
+      "p": 0.0
+    }
+  },
+  "best_ks": "lognorm",
+  "hill_alpha": 4.091302963439513,
+  "tail_class": "light",
+  "source": "w2_latencies.json",
+  "author": "Swayam Shakya"
+}
