@@ -1,0 +1,18 @@
+% Table 1 — QEC decode latency summary. Author: Swayam Shakya
+% Requires \usepackage{booktabs, amsmath, textcomp}
+\begin{table}[t]
+  \centering
+  \caption{Decode latency by implementation tier ($n = 10\,000$ cycles each).
+    VR is the share of cycles slower than $\tau_{\mathrm{DD}} = T_2/N = 40\,\text{\textmu s}$,
+    with an exact (Clopper--Pearson) 95\% interval. $^{*}$Modelled, not measured.}
+  \label{tab:latency}
+  \begin{tabular}{lrrrlr}
+    \toprule
+    Tier & Median (ns) & P99 (ns) & Max (ns) & VR@40\,\textmu s (\%) & Hill $\alpha$ \\
+    \midrule
+    Python & 113 & 268 & 41,786 & 0.01 [0.00, 0.056] & 3.95 \\
+    C extension & 31 & 46 & 23,009 & 0.00 [0.00, 0.037] & 7.93 \\
+    Bare-metal$^{*}$ & 85 & 95 & 102 & 0.00 [0.00, 0.037] & 52.66 \\
+    \bottomrule
+  \end{tabular}
+\end{table}

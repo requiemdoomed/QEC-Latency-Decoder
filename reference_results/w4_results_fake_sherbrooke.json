@@ -1,0 +1,96 @@
+{
+  "author": "Swayam Shakya",
+  "backend": "fake_sherbrooke",
+  "shots": 4000,
+  "mode": "local calibrated simulation",
+  "median_T1_us": 278.41972084544125,
+  "median_T2_us": 170.0127424244177,
+  "tau_dd_us": 56.670914141472565,
+  "stage_duration_us": 6.755555555555553,
+  "transpiled": {
+    "bare": {
+      "depth": 3,
+      "two_qubit_gates": 0,
+      "physical_qubits": [
+        60
+      ]
+    },
+    "offline": {
+      "depth": 43,
+      "two_qubit_gates": 12,
+      "physical_qubits": [
+        41,
+        53,
+        59,
+        60,
+        61
+      ]
+    },
+    "realtime": {
+      "depth": 46,
+      "two_qubit_gates": 12,
+      "physical_qubits": [
+        41,
+        53,
+        59,
+        60,
+        61
+      ]
+    }
+  },
+  "logical": {
+    "bare": {
+      "correct": 3895,
+      "shots": 4000,
+      "fidelity": 0.97375,
+      "ci": [
+        0.9683224492459348,
+        0.9782684782370732
+      ]
+    },
+    "majority vote only": {
+      "correct": 3971,
+      "shots": 4000,
+      "fidelity": 0.99275,
+      "ci": [
+        0.9896072080079771,
+        0.9949472606300221
+      ]
+    },
+    "offline decode": {
+      "correct": 3964,
+      "shots": 4000,
+      "fidelity": 0.991,
+      "ci": [
+        0.9875659423125668,
+        0.9934918843769464
+      ]
+    },
+    "real-time feed-forward": {
+      "correct": 3960,
+      "shots": 4000,
+      "fidelity": 0.99,
+      "ci": [
+        0.9864122602137414,
+        0.9926474853623511
+      ]
+    }
+  },
+  "tests": {
+    "bare vs real-time": {
+      "chi2": 28.769727166970302,
+      "p": 8.151535923979019e-08,
+      "difference_pct_points": 1.625
+    },
+    "bare vs offline decode": {
+      "chi2": 33.382696262766004,
+      "p": 7.569445995289102e-09,
+      "difference_pct_points": 1.725
+    },
+    "offline vs real-time": {
+      "chi2": 0.1195568426366269,
+      "p": 0.729515627242391,
+      "difference_pct_points": -0.1
+    }
+  }
+}
