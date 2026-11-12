@@ -1,3 +1,0 @@
-# extra tools for the tests (pip install -r requirements-dev.txt)
--r requirements.txt
-pytest==8.4.2
