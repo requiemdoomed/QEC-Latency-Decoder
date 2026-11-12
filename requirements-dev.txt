@@ -1,0 +1,8 @@
+# extra tools for the tests and the notebook (pip install -r requirements-dev.txt)
+-r requirements.txt
+pytest==8.4.2
+jupyterlab==4.6.6
+ipykernel==7.4.0
+nbclient==0.11.0
+nbconvert==7.17.2
+nbformat==5.11.1
