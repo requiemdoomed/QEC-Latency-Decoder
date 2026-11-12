@@ -12,7 +12,6 @@ import experiment_3_jitter_profiler as prof
 
 SRC_C = os.path.join(os.path.dirname(os.path.abspath(prof.__file__)), 'qec_decode.c')
 
-
 @pytest.fixture(scope='module')
 def lib(tmp_path_factory):
     if shutil.which('gcc') is None:
@@ -23,7 +22,6 @@ def lib(tmp_path_factory):
                     '-Werror', '-o', str(so), SRC_C], check=True)
     return prof.load_c_library(str(so))
 
-
 def test_c_table_matches_python_table(lib):
     lib.decode_syndrome.argtypes = [ctypes.c_uint8]
     lib.decode_syndrome.restype = ctypes.c_int8
@@ -32,7 +30,6 @@ def test_c_table_matches_python_table(lib):
         expected = -1 if qubit is None else qubit
         assert lib.decode_syndrome(int(syndrome, 2)) == expected
 
-
 def test_batch_timers_return_positive_latencies(lib):
     n = 500
     lat = prof.c_tier(lib, n)
@@ -40,7 +37,6 @@ def test_batch_timers_return_positive_latencies(lib):
     assert lat.shape == (n,) and floor.shape == (n,)
     assert np.all(lat >= 0) and np.all(floor >= 0)
     assert np.median(lat) < 1e6        # a table lookup should never take a millisecond
-
 
 def test_missing_library_gives_a_clear_error(monkeypatch, tmp_path):
     monkeypatch.setenv('QEC_DECODE_LIB', str(tmp_path / 'nope.so'))
