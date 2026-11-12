@@ -22,7 +22,6 @@ import matplotlib.pyplot as plt  # noqa: E402
 BLUE, ORANGE, AQUA = '#2a78d6', '#eb6834', '#1baf7a'   # data series 1, 2, 3
 INK, MUTED, GRID = '#0b0b0b', '#52514e', '#d9d8d4'     # text, reference lines, grid
 
-
 def apply() -> None:
     """Quiet axes, thin lines, and fonts embedded in the PDFs."""
     plt.rcParams.update({
@@ -45,7 +44,6 @@ def apply() -> None:
         'legend.frameon': False,
         'pdf.fonttype': 42,      # TrueType fonts inside the PDF (journals ask for this)
     })
-
 
 def save(fig, stem: str) -> None:
     """Write a vector PDF and a PNG preview with the same name, then free the figure."""
