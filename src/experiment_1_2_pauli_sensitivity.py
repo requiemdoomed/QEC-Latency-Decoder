@@ -41,7 +41,6 @@ PAULIS = ['X', 'Y', 'Z']
 # Aer seeding in experiment_1_1_coherence.py.
 SEEDS = np.random.SeedSequence(SEED).generate_state(len(PAULIS) * len(PROBS))
 
-
 def make_noise_model(op: str, prob: float) -> NoiseModel:
     """`op` with probability p on the idle gate, identity the rest of the time."""
     nm = NoiseModel()
@@ -49,7 +48,6 @@ def make_noise_model(op: str, prob: float) -> NoiseModel:
         nm.add_all_qubit_quantum_error(
             pauli_error([(op, prob), ('I', 1.0 - prob)]), ['id'])
     return nm
-
 
 def plus_state_survival(op: str, prob: float, seed: int) -> float:
     qc = QuantumCircuit(1, 1)
@@ -60,7 +58,6 @@ def plus_state_survival(op: str, prob: float, seed: int) -> float:
     sim = AerSimulator(noise_model=make_noise_model(op, prob), seed_simulator=seed)
     counts = sim.run(qc, shots=SHOTS).result().get_counts()
     return counts.get('0', 0) / SHOTS
-
 
 def main() -> dict:
     results = {op: [plus_state_survival(op, float(p), int(SEEDS[j * len(PROBS) + i]))
@@ -104,7 +101,6 @@ def main() -> dict:
         json.dump(out, fh, indent=2)
     print('Saved: w1_pauli.json')
     return out
-
 
 if __name__ == '__main__':
     main()
