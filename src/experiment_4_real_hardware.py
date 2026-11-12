@@ -66,7 +66,6 @@ N_ROUNDS = 3
 CIRCUITS = ['bare', 'offline', 'realtime']
 LUT = {'00': None, '10': 0, '11': 1, '01': 2}
 
-
 # --- circuits ---
 def encoded(feedforward: bool, wait_dt: int = 0) -> QuantumCircuit:
     """The encoded circuit. wait_dt > 0 parks the data qubits for that long
@@ -96,7 +95,6 @@ def encoded(feedforward: bool, wait_dt: int = 0) -> QuantumCircuit:
     qc.measure(qd, out)
     return qc
 
-
 def stage_duration_s(backend, pm) -> float:
     """How long encode + syndrome + ancilla readout takes on this device.
     The bare qubit idles for exactly this long, so the comparison is fair."""
@@ -107,12 +105,10 @@ def stage_duration_s(backend, pm) -> float:
     qc.measure(qa, syn)
     return float(pm.run(qc).estimate_duration(backend.target, unit='s'))
 
-
 def to_dt(seconds: float, backend) -> int:
     """Seconds -> whole device time steps (dt), snapped to the timing grid."""
     grain = max(1, int(getattr(backend.target, 'granularity', 1) or 1))
     return grain * int(round(seconds / backend.target.dt / grain))
-
 
 def bare(delay_s: float, backend) -> QuantumCircuit:
     """One unprotected qubit holding |1> for delay_s. I used id gates for
@@ -123,7 +119,6 @@ def bare(delay_s: float, backend) -> QuantumCircuit:
     qc.delay(n_dt, 0, unit='dt')
     qc.measure(0, 0)
     return qc
-
 
 def fixed_layout_pms(backend):
     """Pick the layout once, for the encoded circuit, and reuse it for all three."""
@@ -136,7 +131,6 @@ def fixed_layout_pms(backend):
                                            initial_layout=[layout[0]],
                                            seed_transpiler=SEED)
     return pm, pm_bare, layout
-
 
 def build_job(backend):
     pm, pm_bare, _ = fixed_layout_pms(backend)
@@ -152,11 +146,9 @@ def build_job(backend):
                                                   for q in inst.qubits})}
     return isa, delay, stats
 
-
 # --- analysis ---
 def majority_is_one(bits: str) -> bool:
     return bits.count('1') >= 2
-
 
 def decode_offline(syn: str, data: str) -> str:
     """Apply the LUT correction to the 3 data bits. Careful: the string is q2 q1 q0."""
@@ -165,7 +157,6 @@ def decode_offline(syn: str, data: str) -> str:
         return data
     i = 2 - q
     return data[:i] + ('0' if data[i] == '1' else '1') + data[i + 1:]
-
 
 def analyse(pubs, backend_name: str, meta: dict) -> dict:
     up, off, rt = pubs
@@ -212,7 +203,6 @@ def analyse(pubs, backend_name: str, meta: dict) -> dict:
     plot(out, stem)
     return out
 
-
 def plot(res: dict, stem: str) -> None:
     rows = res['logical']
     names = list(rows)
@@ -239,7 +229,6 @@ def plot(res: dict, stem: str) -> None:
             transform=ax.transAxes, fontsize=8.5, color=qec_style.MUTED)
     qec_style.save(fig, f'fig5_hardware_{stem}')
 
-
 def device_meta(backend, delay_s: float, stats: dict, mode: str) -> dict:
     qp = [backend.target.qubit_properties[i] for i in range(backend.num_qubits)]
     t2 = np.array([q.t2 for q in qp if q is not None and q.t2])
@@ -256,7 +245,6 @@ def device_meta(backend, delay_s: float, stats: dict, mode: str) -> dict:
             'median_T2_us': t2_med * 1e6, 'tau_dd_us': t2_med / N_ROUNDS * 1e6,
             'stage_duration_us': delay_s * 1e6, 'transpiled': stats}
 
-
 # --- entry points ---
 def make_sampler(backend) -> Sampler:
     """I want raw numbers: twirling off, dynamical decoupling off (DD can't be
@@ -267,7 +255,6 @@ def make_sampler(backend) -> Sampler:
     sampler.options.dynamical_decoupling.enable = False
     return sampler
 
-
 def run_local(fake_name: str = 'FakeKingston') -> dict:
     backend = getattr(fake_provider, fake_name)()
     isa, delay, stats = build_job(backend)
@@ -276,7 +263,6 @@ def run_local(fake_name: str = 'FakeKingston') -> dict:
     sampler.options.simulator.seed_simulator = SEED
     result = sampler.run(isa, shots=SHOTS).result()
     return analyse(result, backend.name, meta)
-
 
 def run_sweep(fake_name: str = 'FakeKingston') -> dict:
     """Logical error vs decoder wait, on the local replica only."""
@@ -327,7 +313,6 @@ def run_sweep(fake_name: str = 'FakeKingston') -> dict:
     plot_sweep(out, stem)
     return out
 
-
 def plot_sweep(res: dict, stem: str) -> None:
     rows = res['rows']
     w = np.array([r['wait_us'] for r in rows])
@@ -367,14 +352,12 @@ def plot_sweep(res: dict, stem: str) -> None:
             ' · Wilson 95% CI', ha='right', fontsize=7.5, color=qec_style.MUTED)
     qec_style.save(fig, f'fig6_latency_sweep_{stem}')
 
-
 def draw_circuit() -> None:
     """Draw the real-time circuit for the write-up (needs pylatexenc)."""
     fig = encoded(True).draw('mpl', style='bw', fold=-1)
     fig.savefig('fig0_protected_circuit.png', dpi=200, bbox_inches='tight')
     plt.close(fig)
     print('Saved: fig0_protected_circuit.png')
-
 
 def connect() -> QiskitRuntimeService:
     """Load the account saved by save_ibm_account.py."""
@@ -383,7 +366,6 @@ def connect() -> QiskitRuntimeService:
     except Exception as exc:                  # no saved key, a wrong key, or no internet
         raise SystemExit(f'Could not connect to IBM Quantum: {exc}\n'
                          'Run save_ibm_account.py once, then try again.') from exc
-
 
 def submit() -> str:
     service = connect()
@@ -402,7 +384,6 @@ def submit() -> str:
           f"saved w4_job_manifest.json")
     return job.job_id()
 
-
 def retrieve(job_id: str) -> dict:
     service = connect()
     job = service.job(job_id)
@@ -413,7 +394,6 @@ def retrieve(job_id: str) -> dict:
         meta = {'mode': 'IBM Quantum hardware'}
     meta = {k: v for k, v in meta.items() if k not in ('author', 'experiment', 'shots')}
     return analyse(job.result(), job.backend().name, meta)
-
 
 if __name__ == '__main__':
     args = sys.argv[1:]
