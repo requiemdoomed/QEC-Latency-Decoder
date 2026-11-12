@@ -53,14 +53,12 @@ DEPTHS = np.linspace(0, 6000, 25).astype(int)   # 0 to 300 us of idling
 # with seed + k. curve_fit assumes the points are independent.
 SEEDS = np.random.SeedSequence(SEED).generate_state(len(DEPTHS))
 
-
 def build_noise_model(t1_ns: float, t2_ns: float, gate_ns: float) -> NoiseModel:
     """Thermal relaxation on the idle gates only; the two H gates are perfect."""
     nm = NoiseModel()
     nm.add_all_qubit_quantum_error(
         thermal_relaxation_error(t1_ns, t2_ns, gate_ns), ['id'])
     return nm
-
 
 def ramsey_circuit(depth: int) -> QuantumCircuit:
     qc = QuantumCircuit(1, 1)
@@ -71,11 +69,9 @@ def ramsey_circuit(depth: int) -> QuantumCircuit:
     qc.measure(0, 0)
     return qc
 
-
 def fidelity_model(t_us, t2_us):
     """F(t) = 0.5 + 0.5 * exp(-t / T2)"""
     return 0.5 + 0.5 * np.exp(-np.asarray(t_us, dtype=float) / t2_us)
-
 
 def main() -> dict:
     nm = build_noise_model(T1_US * 1e3, T2_US * 1e3, GATE_NS)
@@ -137,7 +133,6 @@ def main() -> dict:
         json.dump(out, fh, indent=2)
     print('Saved: w1_coherence.json')
     return out
-
 
 if __name__ == '__main__':
     main()
