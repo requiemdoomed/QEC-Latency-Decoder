@@ -1,10 +1,8 @@
 # [How Fast Does a Quantum Error-Correction Decoder Need to Be?](https://requiemdoomed.github.io/QEC-Latency-Decoder/)
 
-**Measuring Classical Feedback Latency in Software QEC Decoders, from Simulation to IBM Device Replicas**
+**QEC Latency Decoder : Measuring Classical Feedback Latency in Software QEC Decoders, from Simulation to IBM Device Replicas**
 
-*Swayam Shakya · Faculty of Science & Technology, Algoma University · 2026*
-
-**Notebook:** [QEC_Latency_Decoder.ipynb](QEC_Latency_Decoder.ipynb) (the whole project, runnable) · **Paper:** [QEC_Research_Paper.pdf](paper/QEC_Research_Paper.pdf) (IEEE format) · **Live walkthrough:** [requiemdoomed.github.io/QEC-Latency-Decoder](https://requiemdoomed.github.io/QEC-Latency-Decoder/)
+*Swayam Shakya · 2026*
 
 ![Overview of the walkthrough page](docs/screenshots/overview.png)
 
