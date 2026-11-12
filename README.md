@@ -61,43 +61,7 @@ Every check goes into an audit log, and the last cell stops with an error if any
 
 ---
 
-## Run it yourself
-
-You need Linux, macOS or WSL on Windows, Python 3.11–3.13 and `gcc`.
-
-```bash
-git clone https://github.com/requiemdoomed/QEC-Latency-Decoder.git
-cd QEC-Latency-Decoder
-bash setup.sh                          # makes qec-env/ and installs the pinned versions
-source qec-env/bin/activate
-jupyter lab QEC_Latency_Decoder.ipynb  # the whole project, step by step (about 5 minutes)
-bash run_all.sh                        # or: just rerun the experiments into outputs/ (about 6 minutes)
-pytest                                 # runs the test suite
-```
-
-To run the notebook without opening it: `jupyter nbconvert --to notebook --execute --inplace QEC_Latency_Decoder.ipynb`.
-
-The seeded simulations (parts 1, 2 and 4) reproduce exactly on the same kind of machine: two clean reproductions on 11 November 2026 matched every seeded result file in `reference_results/` byte for byte. On a different CPU, Aer's floating point can shift the odd shot (on a 2.8 GHz Xeon the Eagle sweep moved by one shot in 4,000, and the original code shows the same shift there).
-
-The timing results (part 3) depend on your machine and its load, so medians and especially the worst stalls will differ from mine. That variation is part of what the project is about. [`reproducibility_runs/`](reproducibility_runs) holds the summaries of six complete runs, which the paper pools. Every timing result records the CPU model and Python version it came from.
-
-No IBM account is needed for any of the above. The device experiments use `FakeKingston` and `FakeSherbrooke`, the snapshots of real IBM devices that ship with `qiskit-ibm-runtime`.
-
-### Running on a real IBM quantum computer
-
-```bash
-python src/save_ibm_account.py                          # asks for your API key once
-python src/experiment_4_real_hardware.py submit         # least-busy device with dynamic circuits
-python src/experiment_4_real_hardware.py retrieve <job_id>
-```
-
-The job is 3 circuits × 4,000 shots, which fits easily in the free Open Plan's 10 minutes per 28 days. This step hasn't been run yet, and it's the main next step for the project.
-
----
-
 ## What I learned along the way
-
-My first version ran without errors but gave several quietly wrong answers:
 
 - **Wrong starting state.** The Ramsey experiment first started from |0⟩, which thermal relaxation never changes, so the fit reported T₂ = 44,142 µs. Starting from |+⟩ fixed it.
 - **Overlapping random seeds.** When Aer simulates shot by shot, it seeds shot *k* with `seed + k`, so seeds 7, 8, 9 … replayed the same random stream one shot apart and gave correlated "independent" results. Seeds are now spread with `numpy.random.SeedSequence`.
@@ -118,19 +82,6 @@ My first version ran without errors but gave several quietly wrong answers:
 
 ---
 
-## Repository contents
-
-| Path | What it holds |
-|---|---|
-| `QEC_Latency_Decoder.ipynb` | the whole project as one executed notebook: theory, experiments, figures, independent checks, tests and the consistency audit |
-| `index.html` | the walkthrough page, generated from the code by `site/build_html.py` |
-| `src/` | experiment code (Python and the C decoder) |
-| `reference_results/` | the reference run: JSON data, figures (PNG and PDF), LaTeX table |
-| `reproducibility_runs/` | summaries of six complete timing runs |
-| `paper/` | the paper (PDF and Word), its figure script and manuscript source |
-| `tests/` | automated tests (also run from the notebook) |
-| `docs/screenshots/` | screenshots of the walkthrough page |
-
 ## Tech stack
 
 Python 3.11–3.13 · Qiskit 2.5.2 · Qiskit Aer 0.17.2 · qiskit-ibm-runtime 0.50.0 (client-side `Sampler`) · SciPy 1.17.1 · NumPy 2.4.6 · statsmodels 0.15.0 · Matplotlib 3.11.2 · C (GCC, ctypes) · pytest · JupyterLab
@@ -140,9 +91,9 @@ Python 3.11–3.13 · Qiskit 2.5.2 · Qiskit Aer 0.17.2 · qiskit-ibm-runtime 0.
 GitHub's **"Cite this repository"** button reads [`CITATION.cff`](CITATION.cff).
 
 ```bibtex
-@software{shakya_qec_latency_2026,
+@software{shakya_qec_latency_decoder_2026,
   author  = {Shakya, Swayam},
-  title   = {How Fast Does a Quantum Error-Correction Decoder Need to Be? Measuring Classical Feedback Latency in Software {QEC} Decoders, from Simulation to {IBM} Device Replicas},
+  title   = {QEC Latency Decoder : Measuring Classical Feedback Latency in Software {QEC} Decoders, from Simulation to {IBM} Device Replicas},
   year    = {2026},
   version = {2.1.0},
   url     = {https://github.com/requiemdoomed/QEC-Latency-Decoder}
@@ -151,7 +102,7 @@ GitHub's **"Cite this repository"** button reads [`CITATION.cff`](CITATION.cff).
 
 ## Author
 
-**Swayam Shakya**, Faculty of Science & Technology, Algoma University, Brampton, ON, Canada. Questions and suggestions are welcome through GitHub issues.
+**Swayam Shakya (2026)**, Questions and suggestions are welcome through GitHub issues.
 
 ## License
 
