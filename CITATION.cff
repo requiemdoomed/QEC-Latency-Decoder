@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software or its results, please cite it as below."
-title: "How Fast Does a Quantum Error-Correction Decoder Need to Be? Measuring Classical Feedback Latency in Software QEC Decoders, from Simulation to IBM Device Replicas"
+title: "QEC Latency Decoder : Measuring Classical Feedback Latency in Software QEC Decoders, from Simulation to IBM Device Replicas"
 abstract: >-
   Code, data and figures for a study of classical feedback latency in quantum error
   correction. A look-up-table decoder for the three-qubit bit-flip code is timed in Python
