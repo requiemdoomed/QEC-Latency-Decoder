@@ -27,7 +27,6 @@ from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit_aer import AerSimulator
 from qiskit_aer.noise import NoiseModel, thermal_relaxation_error
 
-
 class BitFlipCode:
     """3-qubit bit-flip code. It can fix any single X error on the data qubits."""
 
@@ -128,7 +127,6 @@ class BitFlipCode:
 
         return syndrome_str, correction, float(t1 - t0), correction == inject_qubit
 
-
 def run_latency_experiment(n_cycles: int = 10_000,
                            output_file: str = 'w2_latencies.json') -> dict:
     """n_cycles cycles; each one gets no error or one random X error."""
@@ -181,7 +179,6 @@ def run_latency_experiment(n_cycles: int = 10_000,
     for lab, row in zip(labels, confusion):
         print(f"  {lab:>4}: {row.tolist()}")
     return out
-
 
 if __name__ == '__main__':
     run_latency_experiment(n_cycles=10_000)
