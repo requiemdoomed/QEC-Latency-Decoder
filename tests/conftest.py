@@ -8,7 +8,6 @@ import pytest
 SRC = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir, 'src')
 sys.path.insert(0, os.path.abspath(SRC))
 
-
 @pytest.fixture(autouse=True)
 def _scratch_dir(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
