@@ -4,8 +4,6 @@
 
 *Swayam Shakya · 2026*
 
-![Overview of the walkthrough page](docs/screenshots/overview.png)
-
 Quantum error correction only works if the loop *measure the syndrome → decode → apply the correction* finishes before the qubits lose their state. Simulations usually treat the classical part of that loop as free. This project measures it.
 
 I used the smallest code that runs the whole loop, the three-qubit bit-flip code, whose decoder is a four-entry look-up table. Because the decoding work itself takes a few nanoseconds, almost everything in its latency distribution comes from the language runtime and the operating system. I timed the decoder in Python and in C, counted how often it misses a 40 µs coherence deadline, and then ran the code with real-time feed-forward on calibrated replicas of two IBM processors to see what each microsecond of delay costs.
