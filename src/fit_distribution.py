@@ -23,11 +23,9 @@ import sys
 import numpy as np
 from scipy import stats
 
-
 def load_latencies(path: str = 'w2_latencies.json') -> np.ndarray:
     with open(path) as fh:
         return np.asarray(json.load(fh)['latencies_ns'], dtype=float)
-
 
 def hill_tail_index(x: np.ndarray, k_frac: float = 0.05) -> float:
     """Hill (1975) estimator using the k = k_frac * n largest values."""
@@ -37,14 +35,12 @@ def hill_tail_index(x: np.ndarray, k_frac: float = 0.05) -> float:
     mean_excess = float(np.mean(log_excess))
     return float('inf') if mean_excess == 0 else 1.0 / mean_excess
 
-
 def tail_class(alpha: float) -> str:
     if alpha > 4:
         return 'light'
     if alpha > 2:
         return 'moderate'
     return 'heavy'
-
 
 def fit_and_report(lat: np.ndarray) -> dict:
     lat = lat[lat > 0]
@@ -77,7 +73,6 @@ def fit_and_report(lat: np.ndarray) -> dict:
     return {'n': int(lat.size), 'ad_stat': float(ad.statistic), 'ad_p': float(ad.pvalue),
             'ad_lognormal_pass': ad_pass, 'ks': ks, 'best_ks': best,
             'hill_alpha': alpha, 'tail_class': tail_class(alpha)}
-
 
 if __name__ == '__main__':
     path = sys.argv[1] if len(sys.argv) > 1 else 'w2_latencies.json'
