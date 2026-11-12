@@ -57,7 +57,6 @@ P_TH_PCT = 1.0                   # ~1% surface-code threshold, used as my error 
 KEY_TAUS_NS = [1_000, 5_000, 10_000, 40_000]
 TAU_GRID_NS = np.logspace(1, 5, 121)        # 10 ns … 100 µs
 
-
 # --- tier 1: plain Python ---
 def python_tier(n: int) -> np.ndarray:
     syndromes = RNG.choice(list(SYNDROME_TABLE), n + WARMUP).tolist()
@@ -68,14 +67,12 @@ def python_tier(n: int) -> np.ndarray:
         lat[i] = time.perf_counter_ns() - t0
     return lat[WARMUP:]
 
-
 def python_floor(n: int) -> np.ndarray:
     lat = np.empty(n + WARMUP)
     for i in range(n + WARMUP):
         t0 = time.perf_counter_ns()
         lat[i] = time.perf_counter_ns() - t0
     return lat[WARMUP:]
-
 
 # --- tier 2: the C library through ctypes ---
 def cpu_model() -> str:
@@ -90,7 +87,6 @@ def cpu_model() -> str:
         pass
     return platform.processor() or 'unknown'           # macOS and others
 
-
 def environment() -> dict:
     """Python, OS, CPU and clock details, stored with every timing result."""
     clock = time.get_clock_info('perf_counter')
@@ -103,7 +99,6 @@ def environment() -> dict:
         'perf_counter_resolution_s': clock.resolution,
         'perf_counter_implementation': clock.implementation,
     }
-
 
 def find_c_library() -> str:
     """Look for qec_decode.so in the usual places, first match wins:
@@ -122,7 +117,6 @@ def find_c_library() -> str:
         '    gcc -O2 -shared -fPIC -o qec_decode.so qec_decode.c\n'
         'or point QEC_DECODE_LIB at it. (On Windows, run the project inside WSL.)')
 
-
 def load_c_library(path: str = None) -> ctypes.CDLL:
     lib = ctypes.CDLL(path or find_c_library())
     i64p = ctypes.POINTER(ctypes.c_int64)
@@ -132,7 +126,6 @@ def load_c_library(path: str = None) -> ctypes.CDLL:
     lib.timer_floor_batch.restype = None
     return lib
 
-
 def c_tier(lib: ctypes.CDLL, n: int) -> np.ndarray:
     syn = RNG.integers(0, 4, n + WARMUP, dtype=np.uint8)
     out = np.empty(n + WARMUP, dtype=np.int64)
@@ -140,18 +133,15 @@ def c_tier(lib: ctypes.CDLL, n: int) -> np.ndarray:
                      out.ctypes.data_as(ctypes.POINTER(ctypes.c_int64)), n + WARMUP)
     return out[WARMUP:].astype(float)
 
-
 def c_floor(lib: ctypes.CDLL, n: int) -> np.ndarray:
     out = np.empty(n + WARMUP, dtype=np.int64)
     lib.timer_floor_batch(out.ctypes.data_as(ctypes.POINTER(ctypes.c_int64)), n + WARMUP)
     return out[WARMUP:].astype(float)
 
-
 # --- tier 3: bare-metal, modelled (not measured!) ---
 def bare_metal_model(n: int) -> np.ndarray:
     wcet_ns = 41 / 480e6 * 1e9                       # 41 cycles at 480 MHz = 85.4 ns
     return np.clip(RNG.normal(wcet_ns, 0.05 * wcet_ns, n), 0.8 * wcet_ns, None)
-
 
 # --- violation rate ---
 def vr_exact(lat: np.ndarray, tau: float):
@@ -159,7 +149,6 @@ def vr_exact(lat: np.ndarray, tau: float):
     k, n = int(np.sum(lat > tau)), lat.size
     lo, hi = proportion_confint(k, n, alpha=0.05, method='beta')
     return 100 * k / n, 100 * lo, 100 * hi, k
-
 
 def vr_bootstrap(lat: np.ndarray, tau: float, n_resamples: int = 2000):
     """Percentile bootstrap 95 % interval for VR(τ) in %; None if degenerate."""
@@ -173,7 +162,6 @@ def vr_bootstrap(lat: np.ndarray, tau: float, n_resamples: int = 2000):
                         rng=np.random.default_rng(1))
     return [100 * float(res.confidence_interval.low),
             100 * float(res.confidence_interval.high)]
-
 
 def main() -> dict:
     lib = load_c_library()
@@ -332,7 +320,6 @@ def main() -> dict:
     print('Saved: w3_latencies.json')
     return save
 
-
 def repeat_study(repeats: int) -> dict:
     """Run the two measured tiers again `repeats` times. One run's worst stall
     turned out to be a pretty random number, so I wanted to see the spread."""
@@ -363,7 +350,6 @@ def repeat_study(repeats: int) -> dict:
         json.dump(out, fh, indent=2)
     print('Saved: w3_repeats.json')
     return out
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Decode-latency profiler (Experiment 3.2).')
