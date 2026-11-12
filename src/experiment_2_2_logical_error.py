@@ -36,12 +36,10 @@ P_VALUES = [0.01, 0.02, 0.03, 0.05, 0.07, 0.10, 0.15, 0.20, 0.30, 0.40, 0.50]
 # spreads them properly.
 SEEDS = [int(s) for s in np.random.SeedSequence(SEED).generate_state(len(P_VALUES))]
 
-
 def noise(p: float) -> NoiseModel:
     nm = NoiseModel()
     nm.add_all_qubit_quantum_error(pauli_error([('X', p), ('I', 1 - p)]), ['id'])
     return nm
-
 
 def encoded_circuit() -> QuantumCircuit:
     qd = QuantumRegister(3, 'data')
@@ -64,7 +62,6 @@ def encoded_circuit() -> QuantumCircuit:
     qc.measure(qd, out)
     return qc
 
-
 def bare_circuit() -> QuantumCircuit:
     qc = QuantumCircuit(QuantumRegister(1, 'q'), ClassicalRegister(1, 'out'))
     qc.x(0)
@@ -72,12 +69,10 @@ def bare_circuit() -> QuantumCircuit:
     qc.measure(0, 0)
     return qc
 
-
 def failures(counts: dict) -> int:
     """Shots where the majority of the three data bits is not 1."""
     return sum(n for bits, n in counts.items()
                if bits.split()[0].count('1') < 2)    # 'out' is the left-most register
-
 
 def main() -> dict:
     enc, bare = encoded_circuit(), bare_circuit()
@@ -135,6 +130,5 @@ def main() -> dict:
     print('Saved: w2_logical_error.json')
     return out
 
-
 if __name__ == '__main__':
-    main()
+    main();
