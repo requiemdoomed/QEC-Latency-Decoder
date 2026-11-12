@@ -1,0 +1,180 @@
+{
+  "author": "Swayam Shakya",
+  "environment": {
+    "python": "3.13.16",
+    "platform": "Linux-6.18.44-fc-v378-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "cpu_model": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+    "cpu_count": 2,
+    "perf_counter_resolution_s": 1e-09,
+    "perf_counter_implementation": "clock_gettime(CLOCK_MONOTONIC)"
+  },
+  "repeats": 10,
+  "n_per_run": 10000,
+  "runs": {
+    "Python": [
+      {
+        "median_ns": 74.0,
+        "p99_ns": 101.0,
+        "p999_ns": 198.01000000000204,
+        "max_ns": 42885.0,
+        "misses_at_tau_dd": 1
+      },
+      {
+        "median_ns": 73.0,
+        "p99_ns": 103.0,
+        "p999_ns": 194.0,
+        "max_ns": 26317.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 73.0,
+        "p99_ns": 101.0,
+        "p999_ns": 226.00600000000122,
+        "max_ns": 38320.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 74.0,
+        "p99_ns": 101.0,
+        "p999_ns": 159.0010000000002,
+        "max_ns": 15218.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 74.0,
+        "p99_ns": 100.0,
+        "p999_ns": 168.00500000000102,
+        "max_ns": 14057.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 74.0,
+        "p99_ns": 101.0,
+        "p999_ns": 302.059000000012,
+        "max_ns": 11252.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 76.0,
+        "p99_ns": 128.0,
+        "p999_ns": 434.0,
+        "max_ns": 17060.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 78.0,
+        "p99_ns": 127.0,
+        "p999_ns": 294.0020000000004,
+        "max_ns": 20589.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 78.0,
+        "p99_ns": 105.0,
+        "p999_ns": 173.0270000000055,
+        "max_ns": 13118.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 80.0,
+        "p99_ns": 112.0,
+        "p999_ns": 241.0,
+        "max_ns": 27702.0,
+        "misses_at_tau_dd": 0
+      }
+    ],
+    "C extension": [
+      {
+        "median_ns": 23.0,
+        "p99_ns": 24.0,
+        "p999_ns": 25.0,
+        "max_ns": 4763.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 23.0,
+        "p99_ns": 24.0,
+        "p999_ns": 25.0,
+        "max_ns": 11655.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 23.0,
+        "p99_ns": 24.0,
+        "p999_ns": 25.0,
+        "max_ns": 16146.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 23.0,
+        "p99_ns": 24.0,
+        "p999_ns": 25.0,
+        "max_ns": 36.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 23.0,
+        "p99_ns": 24.0,
+        "p999_ns": 25.0,
+        "max_ns": 36.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 23.0,
+        "p99_ns": 24.0,
+        "p999_ns": 25.0,
+        "max_ns": 26861.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 24.0,
+        "p99_ns": 25.0,
+        "p999_ns": 26.0,
+        "max_ns": 37579.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 25.0,
+        "p99_ns": 30.0,
+        "p999_ns": 36.0,
+        "max_ns": 292.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 25.0,
+        "p99_ns": 31.0,
+        "p999_ns": 37.0,
+        "max_ns": 4802.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 25.0,
+        "p99_ns": 26.0,
+        "p999_ns": 27.0,
+        "max_ns": 4873.0,
+        "misses_at_tau_dd": 0
+      }
+    ]
+  },
+  "pooled": {
+    "Python": {
+      "total_misses": 1,
+      "total_cycles": 100000,
+      "vr_pct": 0.001,
+      "vr_ci_pct": [
+        2.531780477933314e-05,
+        0.005571516034774276
+      ]
+    },
+    "C extension": {
+      "total_misses": 0,
+      "total_cycles": 100000,
+      "vr_pct": 0.0,
+      "vr_ci_pct": [
+        0.0,
+        0.0036888114157924206
+      ]
+    }
+  }
+}

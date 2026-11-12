@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-26",
+  "cpu": "Intel Xeon 2.8 GHz, 2 vCPUs",
+  "note": "clean rerun after the repository refactor",
+  "python": "3.13.16",
+  "platform": "Linux-6.18.44-fc-v153-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "cpu_count": 2,
+  "perf_counter_resolution_s": 1e-09,
+  "perf_counter_implementation": "clock_gettime(CLOCK_MONOTONIC)"
+}

@@ -1,0 +1,107 @@
+{
+  "author": "Swayam Shakya",
+  "tiers": {
+    "Python": {
+      "kind": "measured",
+      "n": 10000,
+      "median_ns": 159.0,
+      "p99_ns": 216.0,
+      "p999_ns": 379.0220000000045,
+      "max_ns": 29334.0,
+      "tau_star_ns": 216.0,
+      "tau_star_ci_ns": [
+        213.0,
+        220.0
+      ],
+      "headroom_x": 185.1851851851852,
+      "hill_alpha": 8.279786523340293,
+      "ad_stat": 261.91420859056234,
+      "ad_p": 0.01,
+      "misses_at_tau_dd": 0,
+      "stalls_over_1us": 5,
+      "stall_median_ns": 6748.0,
+      "vr_at_tau_dd_pct": 0.0,
+      "vr_at_tau_dd_ci_pct": [
+        0.0,
+        0.03688199146187623
+      ]
+    },
+    "C extension": {
+      "kind": "measured",
+      "n": 10000,
+      "median_ns": 33.0,
+      "p99_ns": 40.0,
+      "p999_ns": 48.004000000000815,
+      "max_ns": 121.0,
+      "tau_star_ns": 40.0,
+      "tau_star_ci_ns": [
+        39.0,
+        40.0
+      ],
+      "headroom_x": 1000.0,
+      "hill_alpha": 26.738744755230233,
+      "ad_stat": 161.38737374831544,
+      "ad_p": 0.01,
+      "misses_at_tau_dd": 0,
+      "stalls_over_1us": 0,
+      "stall_median_ns": null,
+      "vr_at_tau_dd_pct": 0.0,
+      "vr_at_tau_dd_ci_pct": [
+        0.0,
+        0.03688199146187623
+      ]
+    },
+    "Bare-metal (modelled)": {
+      "kind": "modelled",
+      "n": 10000,
+      "median_ns": 85.46015156372016,
+      "p99_ns": 95.28151509607139,
+      "p999_ns": 98.50384942022626,
+      "max_ns": 102.26745178620725,
+      "tau_star_ns": 95.28151509607139,
+      "tau_star_ci_ns": [
+        95.03866171842509,
+        95.58346973283312
+      ],
+      "headroom_x": 419.8086056846221,
+      "hill_alpha": 52.65675584869257,
+      "ad_stat": 4.139280034945841,
+      "ad_p": 0.01,
+      "misses_at_tau_dd": 0,
+      "stalls_over_1us": 0,
+      "stall_median_ns": null,
+      "vr_at_tau_dd_pct": 0.0,
+      "vr_at_tau_dd_ci_pct": [
+        0.0,
+        0.03688199146187623
+      ]
+    }
+  },
+  "mann_whitney": {
+    "comparison": "Python vs C extension",
+    "U": 99999449.0,
+    "p": 0.0,
+    "rank_biserial_r": 0.9999889799999999,
+    "median_ratio": 4.818181818181818
+  },
+  "repeats_pooled": {
+    "Python": {
+      "total_misses": 5,
+      "total_cycles": 100000,
+      "vr_pct": 0.005,
+      "vr_ci_pct": [
+        0.001623505681705786,
+        0.011667943042027704
+      ]
+    },
+    "C extension": {
+      "total_misses": 1,
+      "total_cycles": 100000,
+      "vr_pct": 0.001,
+      "vr_ci_pct": [
+        2.531780477933314e-05,
+        0.005571516034774276
+      ]
+    }
+  }
+}

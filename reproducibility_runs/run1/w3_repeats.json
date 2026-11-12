@@ -1,0 +1,171 @@
+{
+  "author": "Swayam Shakya",
+  "repeats": 10,
+  "n_per_run": 10000,
+  "runs": {
+    "Python": [
+      {
+        "median_ns": 124.0,
+        "p99_ns": 218.0,
+        "p999_ns": 392.005000000001,
+        "max_ns": 49176.0,
+        "misses_at_tau_dd": 1
+      },
+      {
+        "median_ns": 116.0,
+        "p99_ns": 189.0,
+        "p999_ns": 332.01400000000285,
+        "max_ns": 40349.0,
+        "misses_at_tau_dd": 1
+      },
+      {
+        "median_ns": 171.0,
+        "p99_ns": 239.0,
+        "p999_ns": 434.0030000000006,
+        "max_ns": 23646.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 171.0,
+        "p99_ns": 232.0,
+        "p999_ns": 430.01800000000367,
+        "max_ns": 22033.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 168.0,
+        "p99_ns": 249.01000000000022,
+        "p999_ns": 432.0320000000065,
+        "max_ns": 23103.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 150.0,
+        "p99_ns": 241.0,
+        "p999_ns": 483.0,
+        "max_ns": 58391.0,
+        "misses_at_tau_dd": 1
+      },
+      {
+        "median_ns": 164.0,
+        "p99_ns": 230.0,
+        "p999_ns": 400.09500000001935,
+        "max_ns": 8697.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 163.0,
+        "p99_ns": 235.01000000000022,
+        "p999_ns": 476.01700000000346,
+        "max_ns": 68349.0,
+        "misses_at_tau_dd": 1
+      },
+      {
+        "median_ns": 172.0,
+        "p99_ns": 240.01000000000022,
+        "p999_ns": 392.01800000000367,
+        "max_ns": 74291.0,
+        "misses_at_tau_dd": 1
+      },
+      {
+        "median_ns": 155.0,
+        "p99_ns": 227.01000000000022,
+        "p999_ns": 396.0250000000051,
+        "max_ns": 25434.0,
+        "misses_at_tau_dd": 0
+      }
+    ],
+    "C extension": [
+      {
+        "median_ns": 29.0,
+        "p99_ns": 41.0,
+        "p999_ns": 70.02100000000428,
+        "max_ns": 21661.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 28.0,
+        "p99_ns": 38.0,
+        "p999_ns": 43.0,
+        "max_ns": 175.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 29.0,
+        "p99_ns": 40.0,
+        "p999_ns": 45.001000000000204,
+        "max_ns": 3933.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 35.0,
+        "p99_ns": 40.0,
+        "p999_ns": 52.001000000000204,
+        "max_ns": 16477.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 33.0,
+        "p99_ns": 40.0,
+        "p999_ns": 59.058000000011816,
+        "max_ns": 178.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 32.0,
+        "p99_ns": 42.0,
+        "p999_ns": 107.00200000000041,
+        "max_ns": 67418.0,
+        "misses_at_tau_dd": 1
+      },
+      {
+        "median_ns": 34.0,
+        "p99_ns": 41.0,
+        "p999_ns": 76.0250000000051,
+        "max_ns": 8750.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 28.0,
+        "p99_ns": 42.0,
+        "p999_ns": 49.0,
+        "max_ns": 14306.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 33.0,
+        "p99_ns": 43.0,
+        "p999_ns": 83.01200000000244,
+        "max_ns": 9355.0,
+        "misses_at_tau_dd": 0
+      },
+      {
+        "median_ns": 28.0,
+        "p99_ns": 39.0,
+        "p999_ns": 47.00200000000041,
+        "max_ns": 26557.0,
+        "misses_at_tau_dd": 0
+      }
+    ]
+  },
+  "pooled": {
+    "Python": {
+      "total_misses": 5,
+      "total_cycles": 100000,
+      "vr_pct": 0.005,
+      "vr_ci_pct": [
+        0.001623505681705786,
+        0.011667943042027704
+      ]
+    },
+    "C extension": {
+      "total_misses": 1,
+      "total_cycles": 100000,
+      "vr_pct": 0.001,
+      "vr_ci_pct": [
+        2.531780477933314e-05,
+        0.005571516034774276
+      ]
+    }
+  }
+}
