@@ -36,13 +36,11 @@ P_TH = 0.01
 TAU_DD_NS = 40_000
 STALL_NS = 1_000      # slower than 1 µs = a stall, not just a slow lookup
 
-
 def hill_alpha(x: np.ndarray, k_frac: float = 0.05) -> float:
     s = np.sort(x[x > 0])[::-1]
     k = max(2, int(len(s) * k_frac))
     m = float(np.mean(np.log(s[:k]) - np.log(s[k])))
     return float('inf') if m == 0 else 1.0 / m
-
 
 def tau_star(x: np.ndarray, rng: np.random.Generator):
     """P99 plus a bootstrap 95 % CI (5,000 resamples)."""
@@ -50,7 +48,6 @@ def tau_star(x: np.ndarray, rng: np.random.Generator):
                           n_resamples=5000, method='percentile', rng=rng)
     return (float(np.percentile(x, 99)),
             [float(res.confidence_interval.low), float(res.confidence_interval.high)])
-
 
 def main() -> dict:
     with open('w3_latencies.json') as fh:
@@ -197,7 +194,6 @@ def main() -> dict:
         json.dump(out, fh, indent=2)
     print('Saved: paper_stats.json')
     return out
-
 
 if __name__ == '__main__':
     main()
